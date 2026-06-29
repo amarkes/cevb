@@ -2,8 +2,13 @@
   "name": "commit-elaborator",
   "displayName": "Commit Elaborator",
   "description": "Analisa as mudanças staged e sugere mensagens de commit na barra do VSCode",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "publisher": "antonio-neto",
+  "icon": "icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/amarkes/cevb"
+  },
   "engines": {
     "vscode": "^1.85.0"
   },
@@ -25,7 +30,7 @@
       {
         "command": "commitElaborator.suggestMessage",
         "title": "Sugerir mensagem de commit com IA",
-        "icon": "$(sparkle)"
+        "icon": "$(wand)"
       }
     ],
     "menus": {
@@ -40,27 +45,6 @@
     "configuration": {
       "title": "Commit Elaborator",
       "properties": {
-        "commitElaborator.anthropicApiKey": {
-          "type": "string",
-          "default": "",
-          "description": "Sua chave de API da Anthropic (Claude). Deixe vazio para usar a variável de ambiente ANTHROPIC_API_KEY.",
-          "markdownDescription": "Sua chave de API da Anthropic. Obtenha em [console.anthropic.com](https://console.anthropic.com). Deixe vazio para usar `ANTHROPIC_API_KEY`."
-        },
-        "commitElaborator.model": {
-          "type": "string",
-          "default": "claude-haiku-4-5-20251001",
-          "enum": [
-            "claude-haiku-4-5-20251001",
-            "claude-sonnet-4-6",
-            "claude-opus-4-8"
-          ],
-          "enumDescriptions": [
-            "Haiku 4.5 — mais rápido e barato",
-            "Sonnet 4.6 — equilibrado",
-            "Opus 4.8 — mais poderoso"
-          ],
-          "description": "Modelo Claude a ser usado para gerar sugestões."
-        },
         "commitElaborator.language": {
           "type": "string",
           "default": "pt-BR",
@@ -107,8 +91,5 @@
     "typescript": "^5.4.5",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4"
-  },
-  "dependencies": {
-    "@anthropic-ai/sdk": "^0.39.0"
   }
 }
