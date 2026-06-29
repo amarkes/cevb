@@ -1,0 +1,114 @@
+{
+  "name": "commit-elaborator",
+  "displayName": "Commit Elaborator",
+  "description": "Analisa as mudanças staged e sugere mensagens de commit na barra do VSCode",
+  "version": "0.1.0",
+  "publisher": "antonio-neto",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "SCM Providers",
+    "Other"
+  ],
+  "keywords": [
+    "git",
+    "commit",
+    "ai",
+    "claude",
+    "anthropic"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "commitElaborator.suggestMessage",
+        "title": "Sugerir mensagem de commit com IA",
+        "icon": "$(sparkle)"
+      }
+    ],
+    "menus": {
+      "scm/title": [
+        {
+          "command": "commitElaborator.suggestMessage",
+          "when": "scmProvider == git",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Commit Elaborator",
+      "properties": {
+        "commitElaborator.anthropicApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Sua chave de API da Anthropic (Claude). Deixe vazio para usar a variável de ambiente ANTHROPIC_API_KEY.",
+          "markdownDescription": "Sua chave de API da Anthropic. Obtenha em [console.anthropic.com](https://console.anthropic.com). Deixe vazio para usar `ANTHROPIC_API_KEY`."
+        },
+        "commitElaborator.model": {
+          "type": "string",
+          "default": "claude-haiku-4-5-20251001",
+          "enum": [
+            "claude-haiku-4-5-20251001",
+            "claude-sonnet-4-6",
+            "claude-opus-4-8"
+          ],
+          "enumDescriptions": [
+            "Haiku 4.5 — mais rápido e barato",
+            "Sonnet 4.6 — equilibrado",
+            "Opus 4.8 — mais poderoso"
+          ],
+          "description": "Modelo Claude a ser usado para gerar sugestões."
+        },
+        "commitElaborator.language": {
+          "type": "string",
+          "default": "pt-BR",
+          "enum": [
+            "pt-BR",
+            "en-US"
+          ],
+          "enumDescriptions": [
+            "Português (Brasil)",
+            "English (US)"
+          ],
+          "description": "Idioma das mensagens de commit geradas."
+        },
+        "commitElaborator.convention": {
+          "type": "string",
+          "default": "conventional",
+          "enum": [
+            "conventional",
+            "free"
+          ],
+          "enumDescriptions": [
+            "Conventional Commits (feat:, fix:, chore:, etc.)",
+            "Texto livre sem convenção"
+          ],
+          "description": "Convenção de formato para as mensagens de commit."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "lint": "eslint src"
+  },
+  "devDependencies": {
+    "@types/node": "^20.x",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.57.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.4.5",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0"
+  }
+}
