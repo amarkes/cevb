@@ -2,7 +2,7 @@
   "name": "commit-elaborator",
   "displayName": "Commit Elaborator",
   "description": "Analisa as mudanças staged e sugere mensagens de commit na barra do VSCode",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "publisher": "antonio-neto",
   "icon": "icon.png",
   "repository": {
