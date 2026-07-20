@@ -144,6 +144,10 @@ function keychainServiceName(claudeDir: string): string {
   // Claude Code derives the keychain service as:
   //   "Claude Code-credentials-{first8ofSHA256(claudeDir)}"
   // The default (personal) account also has "Claude Code-credentials" (no suffix).
+  const home = os.homedir();
+  if (path.normalize(claudeDir) === path.normalize(path.join(home, '.claude'))) {
+    return 'Claude Code-credentials';
+  }
   const hash = crypto.createHash('sha256').update(claudeDir).digest('hex').slice(0, 8);
   return `Claude Code-credentials-${hash}`;
 }
